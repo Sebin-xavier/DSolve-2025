@@ -31,18 +31,17 @@
 ## 🛠️ Setup Instructions
 
 ### Prerequisites
-- Node.js v16+ / Python 3.8+
-- npm/yarn/pip
-- [Any other requirements]
+- Python 3.8+
+- pip
 
 ### Installation
 ```bash
-// {Enter the commands for installation here}
+pip install flask
 ```
 
 ### Running the Project
 ```bash
-// {Enter the commands for running here}
+python app.py
 ```
 
 ## 🤝 How to Contribute
