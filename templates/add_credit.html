@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Form Container Styles */
+    .form-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-container h2 {
+        color: #3a3a3a;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-weight: 600;
+        background: linear-gradient(90deg, #4361ee, #3a0ca3);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* Form Section Styles */
+    .form-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .form-section h3 {
+        color: #4a4a4a;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-section h3::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 20px;
+        background: linear-gradient(180deg, #4361ee, #3a0ca3);
+        margin-right: 12px;
+        border-radius: 4px;
+    }
+
+    /* Form Group Styles */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+    }
+
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus,
+    .form-group input[type="date"]:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #4361ee;
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        outline: none;
+        background-color: #fff;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Checkbox Group Styles */
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .checkbox-group input {
+        margin-right: 0.8rem;
+        width: 18px;
+        height: 18px;
+        accent-color: #4361ee;
+    }
+
+    .checkbox-group label {
+        color: #555;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    /* Small Text Styles */
+    .form-group small {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 0.8rem;
+        color: #777;
+    }
+
+    /* Form Actions Styles */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        color: white;
+        padding: 0.8rem 1.8rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+        background: #f0f0f0;
+        color: #555;
+        padding: 0.8rem 1.8rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background: #e0e0e0;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+        
+        .form-actions {
+            flex-direction: column;
+        }
+        
+        .btn-primary, .btn-secondary {
+            width: 100%;
+        }
+    }
+
+    /* Animation for form sections */
+    .form-section {
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    .form-section:nth-child(1) { animation-delay: 0.1s; }
+    .form-section:nth-child(2) { animation-delay: 0.2s; }
+    .form-section:nth-child(3) { animation-delay: 0.3s; }
+</style>
+
+<div class="form-container">
+    <h2>Add New Reward Credit</h2>
+    <form method="POST" action="{{ url_for('add_credit') }}">
+        <!-- Reward Details Section -->
+        <div class="form-section">
+            <h3>Reward Information</h3>
+            <div class="form-group">
+                <label for="reward_name">Reward Name:</label>
+                <input type="text" id="reward_name" name="reward_name" required>
+            </div>
+            <div class="form-group">
+                <label for="reward_description">Description:</label>
+                <textarea id="reward_description" name="reward_description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="credit_value">Credit Value:</label>
+                <input type="number" id="credit_value" name="credit_value" min="1" required>
+            </div>
+        </div>
+
+        <!-- Redemption Code Section -->
+        <div class="form-section">
+            <h3>Redemption Code</h3>
+            <div class="form-group">
+                <label for="code_type">Code Type:</label>
+                <select id="code_type" name="code_type">
+                    <option value="alphanumeric">Alphanumeric</option>
+                    <option value="numeric">Numeric Only</option>
+                    <option value="pattern">Custom Pattern</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="redeem_code">Redemption Code:</label>
+                <input type="text" id="redeem_code" name="redeem_code" required>
+                <small>This is the code users will enter to claim the reward</small>
+            </div>
+            <div class="form-group">
+                <label for="expiry_date">Expiry Date (optional):</label>
+                <input type="date" id="expiry_date" name="expiry_date">
+            </div>
+        </div>
+
+        <!-- Additional Options -->
+        <div class="form-section">
+            <h3>Additional Options</h3>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="is_public" name="is_public">
+                <label for="is_public">Make this reward publicly available</label>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="multi_use" name="multi_use">
+                <label for="multi_use">Allow multiple redemptions</label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Reward</button>
+            <button type="reset" class="btn-secondary">Reset Form</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

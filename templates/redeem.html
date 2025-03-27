@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3a0ca3;
+        --accent-color: #4895ef;
+        --success-color: #4cc9f0;
+        --warning-color: #f72585;
+        --discount-color: #f94144;
+        --popular-color: #ff9f1c;
+    }
+    
+    .redeem-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    .redeem-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .redeem-header h2 {
+        font-size: 2.2rem;
+        background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+    }
+    
+    .redeem-form {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .redeem-form h3 {
+        margin-top: 0;
+        color: var(--dark-color);
+    }
+    
+    .form-group {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .form-group input {
+        flex: 1;
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    
+    .form-group button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 0 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .form-group button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .rewards-section {
+        margin-top: 3rem;
+    }
+    
+    .section-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-title h3 {
+        font-size: 1.5rem;
+        color: var(--dark-color);
+        margin-right: 1rem;
+    }
+    
+    .section-title .icon {
+        font-size: 1.5rem;
+        color: var(--accent-color);
+    }
+    
+    .rewards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .reward-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border-top: 4px solid var(--accent-color);
+    }
+    
+    .reward-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .reward-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--warning-color);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .popular-badge {
+        background: var(--popular-color);
+    }
+    
+    .reward-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+    }
+    
+    .reward-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0.5rem 0;
+    }
+    
+    .reward-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    
+    .reward-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .reward-likes {
+        display: flex;
+        align-items: center;
+        color: #666;
+    }
+    
+    .reward-likes::before {
+        content: "♥";
+        color: var(--warning-color);
+        margin-right: 0.3rem;
+    }
+    
+    .reward-time {
+        color: var(--discount-color);
+        font-weight: 600;
+    }
+    
+    .reward-code {
+        background: #f5f7fa;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-family: monospace;
+        margin-top: 1rem;
+        display: inline-block;
+    }
+    
+    @media (max-width: 768px) {
+        .form-group {
+            flex-direction: column;
+        }
+        
+        .form-group button {
+            width: 100%;
+            padding: 0.8rem;
+        }
+    }
+</style>
+
+<div class="redeem-container">
+    <div class="redeem-header">
+        <h2>Your Rewards</h2>
+        <p>Redeem exciting offers and bonuses</p>
+    </div>
+    
+    <div class="redeem-form">
+        <h3>Enter Redemption Code</h3>
+        <form method="POST" action="{{ url_for('redeem') }}">
+            <div class="form-group">
+                <input type="text" name="redeem_code" placeholder="Enter code" required>
+                <button type="submit">Redeem</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="rewards-section">
+        <div class="section-title">
+            <h3>Available Rewards</h3>
+            <span class="icon"></span>
+        </div>
+        
+        <div class="rewards-grid">
+            <!-- Reward 1 -->
+            <div class="reward-card">
+                <span class="reward-badge">HOT</span>
+                <div class="reward-value">200%</div>
+                <h4 class="reward-title">Welcome Bonus</h4>
+                <p class="reward-description">Get 200% bonus on your first deposit</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">40k liked</span>
+                    <span class="reward-time">3d left</span>
+                </div>
+                <div class="reward-code">WELCOME200</div>
+            </div>
+            
+            <!-- Reward 2 -->
+            <div class="reward-card">
+                <span class="reward-badge popular-badge">POPULAR</span>
+                <div class="reward-value">₹250 OFF</div>
+                <h4 class="reward-title">First Purchase</h4>
+                <p class="reward-description">Flat ₹250 off on your first order</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">5k liked</span>
+                    <span class="reward-time">1w left</span>
+                </div>
+                <div class="reward-code">FIRST250</div>
+            </div>
+            
+            <!-- Reward 3 -->
+            <div class="reward-card">
+                <div class="reward-value">₹6000 OFF</div>
+                <h4 class="reward-title">Electronics Sale</h4>
+                <p class="reward-description">Flat ₹6000 off on TWS Earbuds & Smartwatches</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">12k liked</span>
+                    <span class="reward-time">5d left</span>
+                </div>
+                <div class="reward-code">AUDIO6000</div>
+            </div>
+            
+            <!-- Reward 4 -->
+            <div class="reward-card">
+                <span class="reward-badge">NEW</span>
+                <div class="reward-value">10% CB</div>
+                <h4 class="reward-title">Cashback Offer</h4>
+                <p class="reward-description">Flat 10% cashback on Amazon & Flipkart</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">8k liked</span>
+                    <span class="reward-time">2d left</span>
+                </div>
+                <div class="reward-code">CASHBACK10</div>
+            </div>
+            
+            <!-- Reward 5 -->
+            <div class="reward-card">
+                <div class="reward-value">₹5555</div>
+                <h4 class="reward-title">Bonus Cash</h4>
+                <p class="reward-description">Free ₹5555 welcome bonus on first deposit</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">15k liked</span>
+                    <span class="reward-time">1w left</span>
+                </div>
+                <div class="reward-code">BONUS5555</div>
+            </div>
+            
+            <!-- Reward 6 -->
+            <div class="reward-card">
+                <span class="reward-badge">LIMITED</span>
+                <div class="reward-value">75% OFF</div>
+                <h4 class="reward-title">Clearance Sale</h4>
+                <p class="reward-description">Flat 75% off on selected items</p>
+                <div class="reward-meta">
+                    <span class="reward-likes">7k liked</span>
+                    <span class="reward-time">4d left</span>
+                </div>
+                <div class="reward-code">CLEAR75</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
