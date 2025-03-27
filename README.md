@@ -1,32 +1,32 @@
 # 🚀 DSolve-2025 Hackathon
 
 ## 👥 Team Information
-**Team Name:** [Your Creative Team Name]  
+**Team Name:** [Sole_Martian]  
 
 **Team Members:**
-- Member 1 Name
-- [Member 1's Github ](https://github.com/username) - Role/Contribution
-- Member 2 Name
-- [Member 2's Github](https://github.com/username) - Role/Contribution
+- Member 1 Alwin Sunu
+- [Member 1's Github ](https://github.com/AlwinSunu) - teamate
+- Member 2 Sebin Xavier
+- [Member 2's Github](https://github.com/Sebin-xavier) - teamate
 
 ## 💡 Project Idea
-[A clear, concise 2-3 sentence description of your project's purpose and value proposition]
+[RewardX is a dynamic web platform designed to help users manage, track, and maximize their reward credits efficiently.]
 
 ## ✨ Key Features
-- 🔍 Feature 1: [Brief description]
-- ⚡ Feature 2: [Brief description] 
-- 🛡️ Feature 3: [Brief description]
+- 🔍 Feature 1: [✅ Add new rewards with details like credit value, expiry date, and redemption code]
+- ⚡ Feature 2: [✅ Browse trending offers, exclusive deals, and exchange rewards with other users] 
+- 🛡️ Feature 3: [✅ Integrate Google Pay offers for a seamless reward experience.]
 
 ## 🎥 Product Demo
-[![Watch the Demo](https://via.placeholder.com/300x200?text=Click+for+Demo+Video)](https://youtube.com/link-to-video)
+[![Watch the Demo]()
 *Click the image above to view our product walkthrough*
 
 ## 🛠️ Tech Stack
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Tech 1     | vX.X.X  |         |
-| Tech 1     | vX.X.X  |         |
-| Tech 1     | vX.X.X  |         |
+| html       | vX.X.X  |         |
+|   css      | vX.X.X  |         |
+| Javascript | vX.X.X  |         |
 
 ## 🛠️ Setup Instructions
 
